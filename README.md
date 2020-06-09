@@ -22,6 +22,30 @@ Because of the relationship between the `JdbcReadJournal` and the `JournalSequen
 
 ### Benchmark results
 
+Each 'Test run' is executed 5x to get a decent sampling of data. Except for the 100k event run, which is only run once due to its size.
+
+#### Only updating refresh-interval
+Test Run | Refresh Interval Config(ms) | Query Delay Config(ms) | Events Persisted | Min update time(ms) | Max update time(ms) | Avg update time(ms) |
+------|----|----|------|------|------|------|
+test-1|50|1000 (default)|1|630|877|768
+test-10|50|1000 (default)|10|835|1036|917.08
+test-100|50|1000 (default)|100|16|1092|722.6
+test-1k|50|1000 (default)|1000|13|1093|772.92
+test-10k|50|1000 (default)|10000|31|1142|694.31
+test-100k|50|1000 (default)|100000|270|1343|716.22
+
+#### Only updating journal-sequence-retrieval.query-delay
+Test Run | Refresh Interval Config(ms) | Query Delay Config(ms) | Events Persisted | Min update time(ms) | Max update time(ms) | Avg update time(ms) |
+------|----|----|------|------|------|------|
+test-1|1000|50|1|106|985|331.4
+test-10|1000|50|10|200|401|282.24
+test-100|1000|50|100|257|578|409.17
+test-1k|1000|50|1000|53|1291|672.37
+test-10k|1000|50|10000|196|1654|879.45
+test-100k|1000|50|100000|76|1727|936.42
+
+#### Updating both refresh-interval and sequence query-delay in tandem
+
 Test Run | Refresh Interval Config(ms) | Query Delay Config(ms) | Events Persisted | Min update time(ms) | Max update time(ms) | Avg update time(ms) |
 ------|----|----|------|------|------|------|
 test-1|1000 (default)|1000 (default)|1|219|1041|431.4

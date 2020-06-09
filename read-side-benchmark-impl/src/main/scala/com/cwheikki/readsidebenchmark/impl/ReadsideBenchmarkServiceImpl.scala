@@ -74,7 +74,7 @@ class ReadsideBenchmarkServiceImpl(clusterSharding: ClusterSharding, persistentE
       .runWith(Sink.seq)
       .map(_ => Done)
       .andThen {
-        case Success(n) => log.info(s"$testId - Successfully created $n events")
+        case Success(n) => log.info(s"$testId - Successfully created $eventsToPersist events")
         case Failure(t) => log.error(s"$testId - Error creating events - ${t.getMessage}")
       }
   }
