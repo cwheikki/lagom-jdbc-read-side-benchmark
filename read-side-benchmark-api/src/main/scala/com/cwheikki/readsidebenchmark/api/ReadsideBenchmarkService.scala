@@ -9,7 +9,7 @@ import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
   * This describes everything that Lagom needs to know about how to serve and
   * consume the ReadsidebenchmarkService.
   */
-trait ReadsidebenchmarkService extends Service {
+trait ReadsideBenchmarkService extends Service {
 
   def runFullBenchmarkTest(testName: String): ServiceCall[NotUsed, Done]
 

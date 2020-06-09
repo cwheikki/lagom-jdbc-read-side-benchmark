@@ -14,7 +14,7 @@ class ReadsidebenchmarkServiceSpec extends AsyncWordSpec with Matchers with Befo
     new ReadsidebenchmarkApplication(ctx) with LocalServiceLocator
   }
 
-  val client: ReadsidebenchmarkService = server.serviceClient.implement[ReadsidebenchmarkService]
+  val client: ReadsideBenchmarkService = server.serviceClient.implement[ReadsideBenchmarkService]
 
   override protected def afterAll(): Unit = server.stop()
 

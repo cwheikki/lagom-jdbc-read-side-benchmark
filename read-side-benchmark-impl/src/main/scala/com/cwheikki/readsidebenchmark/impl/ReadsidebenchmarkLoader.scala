@@ -1,7 +1,7 @@
 package com.cwheikki.readsidebenchmark.impl
 
 import akka.cluster.sharding.typed.scaladsl.Entity
-import com.cwheikki.readsidebenchmark.api.ReadsidebenchmarkService
+import com.cwheikki.readsidebenchmark.api.ReadsideBenchmarkService
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
@@ -23,7 +23,7 @@ class ReadsidebenchmarkLoader extends LagomApplicationLoader {
   override def loadDevMode(context: LagomApplicationContext): LagomApplication =
     new ReadsidebenchmarkApplication(context) with LagomDevModeComponents
 
-  override def describeService = Some(readDescriptor[ReadsidebenchmarkService])
+  override def describeService = Some(readDescriptor[ReadsideBenchmarkService])
 }
 
 abstract class ReadsidebenchmarkApplication(context: LagomApplicationContext)
@@ -34,7 +34,7 @@ abstract class ReadsidebenchmarkApplication(context: LagomApplicationContext)
     with AhcWSComponents {
 
   // Bind the service that this server provides
-  override lazy val lagomServer: LagomServer = serverFor[ReadsidebenchmarkService](wire[ReadsideBenchmarkServiceImpl])
+  override lazy val lagomServer: LagomServer = serverFor[ReadsideBenchmarkService](wire[ReadsideBenchmarkServiceImpl])
 
   // Register the JSON serializer registry
   override lazy val jsonSerializerRegistry: JsonSerializerRegistry = ReadsidebenchmarkSerializerRegistry

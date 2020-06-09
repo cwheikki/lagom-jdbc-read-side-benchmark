@@ -7,7 +7,7 @@ import akka.stream.Materializer
 import akka.stream.scaladsl.{Sink, Source}
 import akka.util.Timeout
 import akka.{Done, NotUsed}
-import com.cwheikki.readsidebenchmark.api.ReadsidebenchmarkService
+import com.cwheikki.readsidebenchmark.api.ReadsideBenchmarkService
 import com.cwheikki.readsidebenchmark.impl.config.ReadSideConfigValues
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntityRegistry
@@ -24,7 +24,7 @@ import scala.util.{Failure, Success}
 class ReadsideBenchmarkServiceImpl(clusterSharding: ClusterSharding, persistentEntityRegistry: PersistentEntityRegistry, config: Config)(
     implicit ec: ExecutionContext,
     mat: Materializer)
-    extends ReadsidebenchmarkService {
+    extends ReadsideBenchmarkService {
 
   private val log = LoggerFactory.getLogger(this.getClass.getSimpleName)
 
@@ -100,7 +100,7 @@ class ReadsideBenchmarkServiceImpl(clusterSharding: ClusterSharding, persistentE
       (s"$name-100", 100, 5),
       (s"$name-1k", 1000, 5),
       (s"$name-10k", 10000, 5),
-      // (s"$name-100k", 100000, 1)
+      (s"$name-100k", 100000, 1)
     )
 
     Source(tests)
