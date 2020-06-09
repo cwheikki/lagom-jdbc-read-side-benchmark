@@ -55,6 +55,24 @@ test-1k|50|50|1000|23|171|98.42
 test-10k|50|50|10000|24|226|106.05
 test-100k|50|50|100000|27|210|108.12
 
+#### Querying results after running benchmark
+```sql
+select
+    m.test_id,
+    max(m.refresh_interval_ms) as refresh_interval_ms,
+    max(m.query_delay_ms) as query_delay_ms,
+    max(m.total_events_persisted) as total_events_persisted,
+    min(m.millis) as min_read_side_update_time_millis,
+    max(m.millis) as max_read_side_update_time_millis,
+    round(avg(m.millis), 2) as avg_read_side_update_time_millis
+from (select *,
+             (time_to_update_ns / 1000000) as millis
+      from read_side_benchmark) m
+where m.test_id like 'test-1%'
+group by (test_id, refresh_interval_ms, query_delay_ms)
+order by total_events_persisted asc;
+```
+
 ### Future enhancements
 - Metrics/monitoring to understand impact on application CPU
 - Metrics/monitoring to understand impact on database
